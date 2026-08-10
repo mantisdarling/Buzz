@@ -52,7 +52,10 @@ if settings.SENTRY_DSN:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("TruthLens API starting up…")
-    create_db_and_tables()
+    try:
+        create_db_and_tables()
+    except Exception as e:
+        logger.warning(f"Database table creation skipped: {e}")
     yield
     logger.info("TruthLens API shutting down.")
 

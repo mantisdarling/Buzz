@@ -6,12 +6,25 @@ from typing import Generator
 
 settings = get_settings()
 
+engine_kwargs = {
+    "pool_pre_ping": True,
+    "echo": (settings.ENVIRONMENT == "development"),
+}
+if "sqlite" in settings.DATABASE_URL:
+    from sqlalchemy.pool import StaticPool
+    engine_kwargs.update({
+        "connect_args": {"check_same_thread": False},
+        "poolclass": StaticPool,
+    })
+else:
+    engine_kwargs.update({
+        "pool_size": 10,
+        "max_overflow": 20,
+    })
+
 engine = create_engine(
     settings.DATABASE_URL,
-    pool_pre_ping=True,          # verify connections before using
-    pool_size=10,
-    max_overflow=20,
-    echo=(settings.ENVIRONMENT == "development"),
+    **engine_kwargs
 )
 
 SessionLocal = sessionmaker(

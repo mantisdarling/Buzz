@@ -8,27 +8,30 @@ Security utilities for TruthLens.
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
+import bcrypt
 import jwt
 from fastapi import Depends, HTTPException, Security, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from passlib.context import CryptContext
 
 from app.core.config import get_settings
 
 settings = get_settings()
 
 # ---------------------------------------------------------------------------
-# Password hashing
+# Password hashing (direct bcrypt)
 # ---------------------------------------------------------------------------
-_pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(plain: str) -> str:
     """Return bcrypt hash of *plain* password."""
-    return _pwd_context.hash(plain)
+    pwd_bytes = plain.encode("utf-8")
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(pwd_bytes, salt).decode("utf-8")
 
 def verify_password(plain: str, hashed: str) -> bool:
     """Verify *plain* against a stored bcrypt *hashed* value."""
-    return _pwd_context.verify(plain, hashed)
+    pwd_bytes = plain.encode("utf-8")
+    hash_bytes = hashed.encode("utf-8")
+    return bcrypt.checkpw(pwd_bytes, hash_bytes)
 
 
 # ---------------------------------------------------------------------------

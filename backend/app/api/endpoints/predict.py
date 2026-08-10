@@ -133,7 +133,7 @@ def _cache_get(key: str) -> Optional[dict]:
 
 def _cache_set(key: str, data: dict, ttl: int = 3600) -> None:
     try:
-        _redis.setex(f"pred:{key}", ttl, json.dumps(data))
+        _redis.set(f"pred:{key}", json.dumps(data), ex=ttl)
     except Exception:
         pass
 
