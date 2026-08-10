@@ -1,0 +1,14 @@
+# Machine Learning Pipeline Dependencies (unconstrained for Python 3.14 compatibility)
+numpy
+pandas
+scikit-learn
+spacy
+transformers
+datasets
+onnx
+onnxruntime
+shap
+joblib
+torch
+tqdm
+requests

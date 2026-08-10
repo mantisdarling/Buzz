@@ -61,3 +61,7 @@ ml/models/
 *.sw?
 .DS_Store
 Thumbs.db
+
+# HuggingFace Trainer outputs
+results/
+logs/
