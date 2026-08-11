@@ -1,8 +1,8 @@
 {
-  "services": {
-    "frontend": {
-      "root": "frontend",
-      "framework": "nextjs"
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/frontend/:path*"
     }
-  }
+  ]
 }
