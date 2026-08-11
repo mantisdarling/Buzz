@@ -92,7 +92,7 @@ export function VerdictChart({ scores, overallConfidence, verdict }: VerdictChar
                   borderRadius: "0.75rem",
                   color: "#f8fafc",
                 }}
-                formatter={(value: any) => [`${value}% Probability of Real`, "Score"]}
+                formatter={(val) => [`${val}% Probability of Real`, "Score"]}
               />
               <Bar dataKey="score" radius={[0, 8, 8, 0]}>
                 {data.map((entry, index) => (

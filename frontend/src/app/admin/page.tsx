@@ -21,7 +21,6 @@ import {
   Tooltip,
   BarChart,
   Bar,
-  Cell,
 } from "recharts";
 
 export default function AdminPage() {
@@ -30,21 +29,27 @@ export default function AdminPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchStats();
+    let isMounted = true;
+    api
+      .getAdminStats()
+      .then((res) => {
+        if (isMounted) {
+          setStats(res);
+          setLoading(false);
+        }
+      })
+      .catch((err: unknown) => {
+        if (isMounted) {
+          const errorMsg =
+            err instanceof Error ? err.message : "Failed to load admin statistics. Admin access required.";
+          setError(errorMsg);
+          setLoading(false);
+        }
+      });
+    return () => {
+      isMounted = false;
+    };
   }, []);
-
-  const fetchStats = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await api.getAdminStats();
-      setStats(res);
-    } catch (err: any) {
-      setError(err.message || "Failed to load admin statistics. Admin access required.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">

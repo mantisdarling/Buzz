@@ -15,21 +15,26 @@ export default function DashboardPage() {
   const [feedbackState, setFeedbackState] = useState<Record<number, boolean>>({});
 
   useEffect(() => {
-    fetchHistory();
+    let isMounted = true;
+    api
+      .getHistory(1, 50)
+      .then((res) => {
+        if (isMounted) {
+          setItems(res.items);
+          setLoading(false);
+        }
+      })
+      .catch((err: unknown) => {
+        if (isMounted) {
+          const errorMsg = err instanceof Error ? err.message : "Failed to load history. Please sign in.";
+          setError(errorMsg);
+          setLoading(false);
+        }
+      });
+    return () => {
+      isMounted = false;
+    };
   }, []);
-
-  const fetchHistory = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await api.getHistory(1, 50);
-      setItems(res.items);
-    } catch (err: any) {
-      setError(err.message || "Failed to load history. Please sign in.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleFeedback = async (id: number, correct: boolean) => {
     try {

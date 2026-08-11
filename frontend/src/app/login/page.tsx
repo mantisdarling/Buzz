@@ -23,8 +23,9 @@ export default function LoginPage() {
       const res = await api.login({ email, password });
       setAuthToken(res.access_token);
       router.push("/");
-    } catch (err: any) {
-      setError(err.message || "Invalid credentials.");
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : "Invalid credentials.";
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }

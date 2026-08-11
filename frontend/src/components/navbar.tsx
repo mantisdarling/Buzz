@@ -12,8 +12,10 @@ export function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    setIsAuthenticated(!!getAuthToken());
-  }, [pathname]);
+    queueMicrotask(() => {
+      setIsAuthenticated(!!getAuthToken());
+    });
+  }, []);
 
   const handleLogout = () => {
     removeAuthToken();

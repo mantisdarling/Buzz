@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Sparkles, CheckCircle2, AlertTriangle, ArrowRight, Play } from "lucide-react";
 
 interface SampleClaim {
@@ -151,13 +152,13 @@ export function PlaygroundSection() {
           </div>
 
           <div className="flex justify-end pt-2">
-            <a
+            <Link
               href="/"
               className="inline-flex items-center space-x-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
             >
               <span>Test Your Own Claim Above</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -24,8 +24,9 @@ export default function RegisterPage() {
       const res = await api.register({ email, username, password });
       setAuthToken(res.access_token);
       router.push("/");
-    } catch (err: any) {
-      setError(err.message || "Registration failed.");
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : "Registration failed.";
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
