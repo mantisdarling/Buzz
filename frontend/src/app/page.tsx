@@ -61,17 +61,17 @@ export default function Home() {
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
         {/* Hero Banner */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/60 text-cyan-400 text-xs font-semibold shadow-lg shadow-cyan-500/10">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-800/60 text-cyan-400 text-xs font-semibold shadow-lg shadow-cyan-500/10">
             <Zap className="w-3.5 h-3.5" />
-            <span>Multi-Model AI Misinformation Defense</span>
+            <span>TruthLens - AI Powered Misinformation and Fake News Detector</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
-            Verify Claims & News with AI Explainability
+            Buzz Misinformation & Claim Verifier
           </h1>
 
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Paste raw text or an article URL. TruthLens combines fine-tuned DistilBERT content classification, spaCy stylometry, and baseline n-gram models to deliver a unified verdict with word-level highlighted reasoning.
+            Paste raw text or an article URL. Buzz combines fine-tuned DistilBERT content classification, spaCy stylometry, and baseline n-gram models to deliver a unified verdict with word-level highlighted reasoning.
           </p>
         </div>
 

@@ -40,8 +40,8 @@ export default function LoginPage() {
             <div className="inline-flex p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-2">
               <ShieldCheck className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-extrabold tracking-tight">Sign In to TruthLens</h2>
-            <p className="text-xs text-slate-400">Access submission history and feedback statistics</p>
+            <h2 className="text-2xl font-extrabold tracking-tight">Sign In to Buzz</h2>
+            <p className="text-xs text-slate-400">TruthLens - AI Powered Misinformation and Fake News Detector</p>
           </div>
 
           {error && (

@@ -32,7 +32,7 @@ export function Navbar() {
             </div>
             <div>
               <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 tracking-tight">
-                TruthLens
+                Buzz
               </span>
               <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-400 border border-cyan-800/50 font-medium">
                 AI v1.0

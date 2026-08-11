@@ -9,13 +9,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TruthLens — AI Misinformation Detector",
+  title: "Buzz — TruthLens - AI Powered Misinformation and Fake News Detector",
   description:
-    "TruthLens uses a multi-model AI ensemble — DistilBERT, spaCy stylometry, and TF-IDF — to detect fake news and misinformation with word-level explanations.",
-  keywords: ["fake news", "misinformation", "AI", "fact check", "NLP"],
+    "Buzz is an AI powered misinformation and fake news detector that uses a multi-model ensemble (DistilBERT, spaCy stylometry, and TF-IDF) to analyze content with word-level explainability.",
+  keywords: ["Buzz", "TruthLens", "fake news", "misinformation", "AI", "fact check", "NLP"],
   openGraph: {
-    title: "TruthLens — AI Misinformation Detector",
-    description: "Detect fake news and misinformation with AI-powered analysis.",
+    title: "Buzz — TruthLens - AI Powered Misinformation and Fake News Detector",
+    description: "TruthLens - AI Powered Misinformation and Fake News Detector",
     type: "website",
   },
 };

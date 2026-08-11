@@ -41,8 +41,8 @@ export default function RegisterPage() {
             <div className="inline-flex p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-2">
               <UserPlus className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-extrabold tracking-tight">Create TruthLens Account</h2>
-            <p className="text-xs text-slate-400">Join the AI misinformation detection platform</p>
+            <h2 className="text-2xl font-extrabold tracking-tight">Create Buzz Account</h2>
+            <p className="text-xs text-slate-400">TruthLens - AI Powered Misinformation and Fake News Detector</p>
           </div>
 
           {error && (
