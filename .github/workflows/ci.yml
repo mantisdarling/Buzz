@@ -1,4 +1,4 @@
-name: TruthLens CI/CD Pipeline
+name: Buzz CI/CD Pipeline
 
 on:
   push:

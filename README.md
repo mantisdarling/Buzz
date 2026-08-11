@@ -1,6 +1,8 @@
-# TruthLens - AI Powered Misinformation and Fake News Detector
+# Buzz
 
-TruthLens is a multi-model AI ensemble platform designed to detect misinformation, fake news, and manipulated text in digital media. It combines fine-tuned DistilBERT NLP transformers, spaCy stylometry, and TF-IDF baseline models to deliver high-precision claim verification with word-level highlighted reasoning.
+> **TruthLens - AI Powered Misinformation and Fake News Detector**
+
+Buzz is a multi-model AI ensemble platform designed to detect misinformation, fake news, and manipulated text in digital media. It combines fine-tuned DistilBERT NLP transformers, spaCy stylometry, and TF-IDF baseline models to deliver high-precision claim verification with word-level highlighted reasoning.
 
 ---
 

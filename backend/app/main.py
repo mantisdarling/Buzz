@@ -51,21 +51,21 @@ if settings.SENTRY_DSN:
 # ---------------------------------------------------------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("TruthLens API starting up…")
+    logger.info("Buzz API starting up…")
     try:
         create_db_and_tables()
     except Exception as e:
         logger.warning(f"Database table creation skipped: {e}")
     yield
-    logger.info("TruthLens API shutting down.")
+    logger.info("Buzz API shutting down.")
 
 
 # ---------------------------------------------------------------------------
 # Application factory
 # ---------------------------------------------------------------------------
 app = FastAPI(
-    title="TruthLens API",
-    description="AI-powered fake news detection — prediction, history, feedback, and admin.",
+    title="Buzz API — TruthLens - AI Powered Misinformation and Fake News Detector",
+    description="Buzz API — TruthLens - AI Powered Misinformation and Fake News Detector",
     version="1.0.0",
     lifespan=lifespan,
     # Never expose internal Python errors in the response body
