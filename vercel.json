@@ -1,8 +1,5 @@
 {
-  "rewrites": [
-    {
-      "source": "/:path*",
-      "destination": "/frontend/:path*"
-    }
-  ]
+  "buildCommand": "npm --prefix frontend run build",
+  "outputDirectory": "frontend/.next",
+  "framework": "nextjs"
 }
