@@ -1,8 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { ShieldCheck, ArrowRight, Zap, Search, Link as LinkIcon, CheckCircle, AlertTriangle, Award } from "lucide-react";
+import { ShieldCheck, ArrowRight, Zap, Search, Link as LinkIcon, CheckCircle, AlertTriangle, Award, Sparkles, RefreshCw } from "lucide-react";
 import { api, PredictResponse } from "@/lib/api";
+
+const quickSamples = [
+  {
+    title: "🔬 Scientific Breakthrough",
+    text: "Peer-reviewed research published by international astrophysicists confirms detection of water vapor in exoplanet atmosphere.",
+  },
+  {
+    title: "⚠️ Viral Conspiracy Rumor",
+    text: "SHOCKING SECRET: Hidden whistleblowers leak evidence that government officials concealed secret weather control devices!",
+  },
+  {
+    title: "🏛️ Central Economic Audit",
+    text: "Federal Reserve chair releases official monetary policy statement affirming interest rate stability after quarterly inflation audits.",
+  },
+];
 
 export function HeroSection() {
   const [activeTab, setActiveTab] = useState<"text" | "url">("text");
@@ -28,6 +43,13 @@ export function HeroSection() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSelectSample = (sampleText: string) => {
+    setActiveTab("text");
+    setInputContent(sampleText);
+    setPredictionResult(null);
+    setErrorMessage(null);
   };
 
   return (
@@ -64,30 +86,48 @@ export function HeroSection() {
 
         {/* Luxury Glass Card Analyzer Container */}
         <div className="max-w-3xl mx-auto luxury-glass-card rounded-3xl p-6 sm:p-10 space-y-6">
-          {/* Tab Switcher */}
-          <div className="flex items-center justify-center p-1 rounded-2xl bg-slate-950/90 border border-amber-500/30 max-w-xs mx-auto">
-            <button
-              onClick={() => { setActiveTab("text"); setInputContent(""); }}
-              className={`flex-1 flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                activeTab === "text"
-                  ? "gold-btn-primary"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <Search className="w-3.5 h-3.5" />
-              <span>Raw Text</span>
-            </button>
-            <button
-              onClick={() => { setActiveTab("url"); setInputContent(""); }}
-              className={`flex-1 flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                activeTab === "url"
-                  ? "gold-btn-primary"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <LinkIcon className="w-3.5 h-3.5" />
-              <span>Article URL</span>
-            </button>
+          {/* Tab Switcher & Quick Samples */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-center p-1 rounded-2xl bg-slate-950/90 border border-amber-500/30 max-w-xs mx-auto">
+              <button
+                onClick={() => { setActiveTab("text"); setInputContent(""); setPredictionResult(null); }}
+                className={`flex-1 flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  activeTab === "text"
+                    ? "gold-btn-primary"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                <Search className="w-3.5 h-3.5" />
+                <span>News Claim</span>
+              </button>
+              <button
+                onClick={() => { setActiveTab("url"); setInputContent(""); setPredictionResult(null); }}
+                className={`flex-1 flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  activeTab === "url"
+                    ? "gold-btn-primary"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                <LinkIcon className="w-3.5 h-3.5" />
+                <span>Article URL</span>
+              </button>
+            </div>
+
+            {/* Quick One-Click Samples */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+              <span className="text-xs text-amber-300/70 font-semibold uppercase tracking-wider mr-1 flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-amber-400" /> Quick Test:
+              </span>
+              {quickSamples.map((sample, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSelectSample(sample.text)}
+                  className="px-3 py-1 rounded-lg text-xs bg-slate-950/80 border border-amber-500/20 text-slate-300 hover:text-amber-300 hover:border-amber-500/50 transition-all duration-200"
+                >
+                  {sample.title}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Form Input */}
@@ -96,7 +136,7 @@ export function HeroSection() {
               <textarea
                 value={inputContent}
                 onChange={(e) => setInputContent(e.target.value)}
-                placeholder="Paste news claim, headline, or statement here for forensic verification..."
+                placeholder="Paste news claim, headline, statement, or rumor here for forensic verification..."
                 className="w-full h-36 p-4 rounded-2xl bg-slate-950/90 border border-amber-500/20 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm transition-all duration-200 resize-none font-sans"
               />
             ) : (
@@ -104,29 +144,41 @@ export function HeroSection() {
                 type="url"
                 value={inputContent}
                 onChange={(e) => setInputContent(e.target.value)}
-                placeholder="https://news-article-domain.com/path"
+                placeholder="https://news-article-domain.com/article-path"
                 className="w-full p-4 rounded-2xl bg-slate-950/90 border border-amber-500/20 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-400 text-sm transition-all duration-200 font-sans"
               />
             )}
 
-            {/* Analyze Action Button */}
-            <button
-              onClick={handleAnalyze}
-              disabled={isLoading || !inputContent.trim()}
-              className="w-full py-4 px-6 rounded-2xl gold-btn-primary disabled:opacity-50 text-sm uppercase tracking-wider flex items-center justify-center space-x-2"
-            >
-              {isLoading ? (
-                <div className="flex items-center space-x-2">
-                  <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
-                  <span>Processing Forensic Analysis...</span>
-                </div>
-              ) : (
-                <>
-                  <span>Verify Article with Buzz</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
+            {/* Action Buttons */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleAnalyze}
+                disabled={isLoading || !inputContent.trim()}
+                className="flex-1 py-4 px-6 rounded-2xl gold-btn-primary disabled:opacity-50 text-sm uppercase tracking-wider flex items-center justify-center space-x-2"
+              >
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                    <span>Processing Forensic Analysis...</span>
+                  </div>
+                ) : (
+                  <>
+                    <span>Verify Claim with Buzz AI</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+
+              {inputContent && (
+                <button
+                  onClick={() => { setInputContent(""); setPredictionResult(null); }}
+                  className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-slate-400 hover:text-amber-300 hover:border-amber-500/30 transition-all"
+                  title="Clear Input"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                </button>
               )}
-            </button>
+            </div>
           </div>
 
           {/* Error Message */}
@@ -141,7 +193,7 @@ export function HeroSection() {
           {predictionResult && (
             <div className="p-6 rounded-2xl bg-slate-950/90 border border-amber-500/30 space-y-5 animate-in fade-in slide-in-from-bottom-3">
               <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">AI Determination</span>
+                <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">Forensic AI Determination</span>
                 <span
                   className={`px-3.5 py-1.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 ${
                     predictionResult.verdict === "Real"
