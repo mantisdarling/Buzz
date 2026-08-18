@@ -90,7 +90,8 @@ export interface AdminStats {
 // Multi-Layer NLP Forensic Analysis Engine
 
 function generateAdvancedForensicAnalysis(content: string, isUrl: boolean): PredictResponse {
-  const normalized = content.toLowerCase();
+  const normalized = content.toLowerCase().trim();
+  const words = content.split(/\s+/).filter(Boolean);
 
   // Known pseudoscience, viral conspiracy, and fabricated patterns
   const highConfidenceFakePatterns = [
@@ -114,6 +115,7 @@ function generateAdvancedForensicAnalysis(content: string, isUrl: boolean): Pred
     "banned from the internet",
     "doctors hate this secret",
     "alien autopsy leaked",
+    "aliens landed",
   ];
 
   // Specific sensationalist and deceptive tokens
@@ -136,20 +138,29 @@ function generateAdvancedForensicAnalysis(content: string, isUrl: boolean): Pred
     "published", "peer-reviewed", "confirmed", "announced", "reported", "statement",
     "study", "researchers", "scientists", "spokesperson", "data", "trajectory",
     "statistics", "audit", "findings", "discovery", "fiscal", "quarterly", "official",
-    "agreed", "investigation", "analysis", "authorized", "recorded", "protocol"
+    "agreed", "investigation", "analysis", "authorized", "recorded", "protocol", "visited", "signed"
   ];
 
   let fakeScorePoints = 0;
   let realScorePoints = 0;
 
-  // 1. Check known high-confidence fake news patterns
+  // 1. Check if input is a question, rumor query, or unsupported short snippet
+  const isQuestion = content.includes("?") || /^(is|was|did|does|will|can|who|what|where|when|why|how)\b/i.test(normalized);
+  const isVeryShort = words.length < 8;
+
+  if (isQuestion) {
+    // Questions are unverified inquiries, not established factual news reports
+    fakeScorePoints += 3.5;
+  }
+
+  // 2. Check known high-confidence fake news patterns
   for (const pattern of highConfidenceFakePatterns) {
     if (normalized.includes(pattern)) {
       fakeScorePoints += 5;
     }
   }
 
-  // 2. Check uppercase shouting and clickbait punctuation
+  // 3. Check uppercase shouting and clickbait punctuation
   const allCapsWords = content.split(/\s+/).filter(w => w.length > 3 && w === w.toUpperCase() && /^[A-Z]+$/.test(w));
   if (allCapsWords.length >= 2) {
     fakeScorePoints += 2.5;
@@ -158,8 +169,7 @@ function generateAdvancedForensicAnalysis(content: string, isUrl: boolean): Pred
     fakeScorePoints += 2;
   }
 
-  // 3. Token-level analysis and SHAP explainability scoring
-  const words = content.split(/\s+/).filter(Boolean);
+  // 4. Token-level analysis and SHAP explainability scoring
   const explanation: ExplanationToken[] = [];
 
   for (const word of words.slice(0, 35)) {
@@ -172,23 +182,29 @@ function generateAdvancedForensicAnalysis(content: string, isUrl: boolean): Pred
       realScorePoints += 1.5;
       explanation.push({ text: word, score: 0.55 });
     } else if (/^\d+(\.\d+)?%?$/.test(cleanWord) || /^\$\d+/.test(cleanWord)) {
-      // Specific numbers, dates, or currencies indicate journalistic precision
       realScorePoints += 0.8;
       explanation.push({ text: word, score: 0.25 });
     } else {
-      const neutralScore = ((cleanWord.length % 5) - 2) * 0.04;
+      const neutralScore = isQuestion || isVeryShort ? -0.15 : ((cleanWord.length % 5) - 2) * 0.04;
       explanation.push({ text: word, score: Number(neutralScore.toFixed(2)) });
     }
   }
 
-  // 4. Determine final verdict based on weighted forensic score
+  // 5. Short unsupported assertions without accredited sources cannot default to Real
+  if (isVeryShort && realScorePoints === 0) {
+    fakeScorePoints += 3.0;
+  } else if (realScorePoints === 0 && fakeScorePoints === 0) {
+    fakeScorePoints += 2.0;
+  }
+
+  // 6. Determine final verdict based on weighted forensic score
   const isFake = fakeScorePoints > realScorePoints;
   
   let confidence: number;
   if (isFake) {
-    confidence = Math.min(0.75 + (fakeScorePoints - realScorePoints) * 0.05, 0.97);
+    confidence = Math.min(0.76 + Math.abs(fakeScorePoints - realScorePoints) * 0.05, 0.96);
   } else {
-    confidence = Math.min(0.80 + (realScorePoints - fakeScorePoints) * 0.04, 0.98);
+    confidence = Math.min(0.82 + Math.abs(realScorePoints - fakeScorePoints) * 0.04, 0.98);
   }
 
   // Calculated sub-model distributions
@@ -207,9 +223,10 @@ function generateAdvancedForensicAnalysis(content: string, isUrl: boolean): Pred
       baseline: baselineScore,
     },
     explanation: explanation.length > 0 ? explanation : [
-      { text: "Article", score: isFake ? -0.3 : 0.4 },
-      { text: "claim", score: isFake ? -0.2 : 0.3 },
-      { text: "verified", score: 0.2 },
+      { text: "Claim", score: isFake ? -0.4 : 0.4 },
+      { text: "analyzed", score: isFake ? -0.2 : 0.3 },
+      { text: "for", score: 0.1 },
+      { text: "authenticity", score: 0.2 },
     ],
     cached: false,
   };
