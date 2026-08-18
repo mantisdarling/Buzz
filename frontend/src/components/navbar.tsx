@@ -24,19 +24,19 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/60 shadow-2xl shadow-cyan-950/20">
+    <header className="sticky top-0 z-50 backdrop-blur-2xl bg-slate-950/85 border-b border-amber-500/20 shadow-2xl shadow-black/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500/20 via-blue-600/20 to-purple-600/20 border border-cyan-500/30 group-hover:border-cyan-400/60 transition-all duration-300 shadow-lg shadow-cyan-500/10">
-              <ShieldCheck className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 group-hover:border-amber-400/60 transition-all duration-300 shadow-lg shadow-amber-500/10">
+              <ShieldCheck className="w-6 h-6 text-amber-400 group-hover:scale-110 transition-transform duration-300" />
             </div>
             <div>
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 tracking-tight">
+              <span className="text-xl font-serif font-bold gold-foil-title tracking-tight">
                 Buzz
               </span>
-              <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-400 border border-cyan-800/50 font-medium">
+              <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-800/50 font-medium">
                 AI v1.0
               </span>
             </div>
@@ -48,7 +48,7 @@ export function Navbar() {
               href="/"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 pathname === "/"
-                  ? "bg-slate-800/90 text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/5"
+                  ? "bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-md shadow-amber-500/5"
                   : "text-slate-300 hover:text-white hover:bg-slate-900/60"
               }`}
             >
@@ -60,7 +60,7 @@ export function Navbar() {
               href="/dashboard"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 pathname === "/dashboard"
-                  ? "bg-slate-800/90 text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/5"
+                  ? "bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-md shadow-amber-500/5"
                   : "text-slate-300 hover:text-white hover:bg-slate-900/60"
               }`}
             >
@@ -72,7 +72,7 @@ export function Navbar() {
               href="/admin"
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 pathname === "/admin"
-                  ? "bg-slate-800/90 text-cyan-400 border border-cyan-500/30 shadow-md shadow-cyan-500/5"
+                  ? "bg-slate-900/90 text-amber-300 border border-amber-500/30 shadow-md shadow-amber-500/5"
                   : "text-slate-300 hover:text-white hover:bg-slate-900/60"
               }`}
             >
@@ -108,7 +108,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="/register"
-                  className="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/20 transition-all duration-200"
+                  className="px-3.5 py-1.5 rounded-lg text-xs font-medium gold-btn-primary shadow-lg transition-all duration-200"
                 >
                   Register
                 </Link>

@@ -23,7 +23,7 @@ const steps: StepItem[] = [
       "Automatic boilerplate and nav removal",
       "SHA-256 prediction hashing for Redis caching",
     ],
-    gradient: "from-cyan-500/20 via-blue-500/20 to-purple-500/20",
+    gradient: "from-amber-500/15 via-yellow-600/10 to-transparent",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const steps: StepItem[] = [
       "spaCy syntactic density and style feature extraction",
       "Statistical term-frequency baseline cross-checking",
     ],
-    gradient: "from-purple-500/20 via-pink-500/20 to-rose-500/20",
+    gradient: "from-amber-600/15 via-orange-600/10 to-transparent",
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const steps: StepItem[] = [
       "Confidence percentage scoring matrix",
       "User feedback loop for continuous accuracy",
     ],
-    gradient: "from-emerald-500/20 via-teal-500/20 to-cyan-500/20",
+    gradient: "from-yellow-500/15 via-amber-500/10 to-transparent",
   },
 ];
 
@@ -57,21 +57,21 @@ export function ScrollytellingSection() {
   const activeStep = steps.find((s) => s.id === activeStepId) || steps[0];
 
   return (
-    <section id="architecture" className="py-24 relative overflow-hidden bg-slate-950/60 border-y border-slate-800/80">
+    <section id="architecture" className="py-28 relative overflow-hidden bg-slate-950/70 border-y border-amber-500/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header Title */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-card border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
-            <Layers className="w-3.5 h-3.5" />
-            <span>Chronicle-Inspired Interactive Pipeline</span>
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full gold-badge text-xs font-semibold uppercase tracking-widest">
+            <Layers className="w-3.5 h-3.5 text-amber-300" />
+            <span>Interactive Verification Pipeline</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            How <span className="gradient-text-cyan">Buzz AI</span> Verifies Information
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif gold-foil-title tracking-tight">
+            How <span className="text-white font-normal italic">Buzz AI</span> Verifies Claims
           </h2>
 
-          <p className="text-slate-400 text-sm sm:text-base">
-            Click through the interactive pipeline stages below to explore how raw claims pass through multi-layer model inspection.
+          <p className="text-slate-300 text-sm sm:text-base font-light">
+            Explore the multi-tier inspection pipeline engineered for institutional fact-checking accuracy.
           </p>
         </div>
 
@@ -83,41 +83,41 @@ export function ScrollytellingSection() {
               <button
                 key={step.id}
                 onClick={() => setActiveStepId(step.id)}
-                className={`p-5 rounded-2xl text-left transition-all duration-300 glass-card-hover border ${
+                className={`p-5 rounded-2xl text-left transition-all duration-300 luxury-glass-card-hover border ${
                   isActive
-                    ? "bg-slate-900/90 border-cyan-500/60 shadow-lg shadow-cyan-500/10"
-                    : "bg-slate-900/40 border-slate-800/60 opacity-70 hover:opacity-100"
+                    ? "bg-slate-900/95 border-amber-400/60 shadow-lg shadow-amber-500/10"
+                    : "bg-slate-950/60 border-slate-800/80 opacity-70 hover:opacity-100"
                 }`}
               >
-                <div className="text-xs font-semibold text-cyan-400 mb-1">{step.badge}</div>
-                <div className="text-sm font-bold text-slate-100">{step.title}</div>
+                <div className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">{step.badge}</div>
+                <div className="text-sm font-serif font-bold text-slate-100">{step.title}</div>
               </button>
             );
           })}
         </div>
 
         {/* Interactive Feature Stage Display Card */}
-        <div className={`p-8 sm:p-12 rounded-3xl glass-card border border-slate-800 bg-gradient-to-br ${activeStep.gradient} transition-all duration-500 shadow-2xl space-y-8`}>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-slate-800/80 pb-6">
+        <div className={`p-8 sm:p-12 rounded-3xl luxury-glass-card border border-amber-500/30 bg-gradient-to-br ${activeStep.gradient} transition-all duration-500 shadow-2xl space-y-8`}>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-amber-500/20 pb-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest">{activeStep.badge}</span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">{activeStep.title}</h3>
+              <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">{activeStep.badge}</span>
+              <h3 className="text-2xl sm:text-4xl font-serif font-bold text-white">{activeStep.title}</h3>
             </div>
-            <div className="p-3 rounded-2xl bg-slate-900/80 border border-slate-700/60 text-cyan-400">
+            <div className="p-3.5 rounded-2xl bg-slate-950/90 border border-amber-500/30 text-amber-300">
               {activeStep.id === 1 && <ShieldAlert className="w-7 h-7" />}
               {activeStep.id === 2 && <Cpu className="w-7 h-7" />}
               {activeStep.id === 3 && <Sparkles className="w-7 h-7" />}
             </div>
           </div>
 
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl font-light">
             {activeStep.description}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
             {activeStep.detailPoints.map((point, index) => (
-              <div key={index} className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 flex items-start space-x-3">
-                <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+              <div key={index} className="p-4 rounded-xl bg-slate-950/90 border border-amber-500/20 flex items-start space-x-3">
+                <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
                 <span className="text-xs text-slate-300 font-medium leading-normal">{point}</span>
               </div>
             ))}
@@ -126,9 +126,9 @@ export function ScrollytellingSection() {
           <div className="flex justify-end pt-4">
             <button
               onClick={() => setActiveStepId((prev) => (prev % 3) + 1)}
-              className="inline-flex items-center space-x-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+              className="inline-flex items-center space-x-2 text-xs font-bold text-amber-300 hover:text-amber-200 uppercase tracking-wider transition-colors"
             >
-              <span>Explore Next Pipeline Stage</span>
+              <span>Next Pipeline Stage</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

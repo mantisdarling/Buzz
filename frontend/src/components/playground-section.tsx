@@ -67,21 +67,21 @@ export function PlaygroundSection() {
   const selectedClaim = sampleClaims.find((c) => c.id === selectedClaimId) || sampleClaims[0];
 
   return (
-    <section id="demo" className="py-24 relative overflow-hidden bg-slate-950/40">
+    <section id="demo" className="py-28 relative overflow-hidden bg-slate-950/60 border-t border-amber-500/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full glass-card border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Interactive Claim Testing Playground</span>
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full gold-badge text-xs font-semibold uppercase tracking-widest">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>Interactive Claim Showcase</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            Test <span className="gradient-text-cyan">Sample Claims</span> Live
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif gold-foil-title tracking-tight">
+            Examine <span className="text-white font-normal italic">Forensic Evidence</span>
           </h2>
 
-          <p className="text-slate-400 text-sm sm:text-base">
-            Click any pre-loaded claim below to inspect how Buzz highlights authenticity signals and key tokens in real time.
+          <p className="text-slate-300 text-sm sm:text-base font-light">
+            Select an investigative sample below to inspect real-time token attribution and credibility scoring.
           </p>
         </div>
 
@@ -93,30 +93,30 @@ export function PlaygroundSection() {
               <button
                 key={claim.id}
                 onClick={() => setSelectedClaimId(claim.id)}
-                className={`p-5 rounded-2xl text-left transition-all duration-300 glass-card-hover border flex items-center justify-between ${
+                className={`p-5 rounded-2xl text-left transition-all duration-300 luxury-glass-card-hover border flex items-center justify-between ${
                   isSelected
-                    ? "bg-slate-900/90 border-cyan-500/60 shadow-lg shadow-cyan-500/10"
-                    : "bg-slate-900/40 border-slate-800/60 opacity-70 hover:opacity-100"
+                    ? "bg-slate-900/95 border-amber-400/60 shadow-lg shadow-amber-500/10"
+                    : "bg-slate-950/60 border-slate-800/80 opacity-70 hover:opacity-100"
                 }`}
               >
                 <div>
-                  <span className="text-xs font-semibold text-cyan-400 block mb-1">{claim.label}</span>
-                  <span className="text-sm font-bold text-slate-200">{claim.category} Claim</span>
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">{claim.label}</span>
+                  <span className="text-sm font-serif font-bold text-slate-100">{claim.category} Claim</span>
                 </div>
-                <Play className={`w-4 h-4 transition-transform ${isSelected ? "text-cyan-400 scale-110" : "text-slate-600"}`} />
+                <Play className={`w-4 h-4 transition-transform ${isSelected ? "text-amber-400 scale-110" : "text-slate-600"}`} />
               </button>
             );
           })}
         </div>
 
         {/* Interactive Result Card */}
-        <div className="max-w-4xl mx-auto glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 space-y-6 shadow-2xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest">
-              Selected Text Analysis
+        <div className="max-w-4xl mx-auto luxury-glass-card rounded-3xl p-8 sm:p-10 border border-amber-500/30 space-y-6 shadow-2xl">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+            <span className="text-xs font-bold text-amber-300 uppercase tracking-widest">
+              Selected Article Analysis
             </span>
             <span
-              className={`px-3 py-1 rounded-full text-xs font-extrabold flex items-center space-x-1.5 ${
+              className={`px-3.5 py-1.5 rounded-full text-xs font-extrabold flex items-center space-x-1.5 ${
                 selectedClaim.category === "Real"
                   ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
                   : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
@@ -127,19 +127,19 @@ export function PlaygroundSection() {
             </span>
           </div>
 
-          <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-serif italic p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80">
+          <p className="text-slate-200 text-base sm:text-lg leading-relaxed font-serif italic p-6 rounded-2xl bg-slate-950/90 border border-amber-500/20">
             &ldquo;{selectedClaim.text}&rdquo;
           </p>
 
           <div className="space-y-3">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
-              SHAP Token Level Explainability Matrix
+            <span className="text-xs font-bold text-amber-300 uppercase tracking-widest block">
+              SHAP Token Attribution Matrix
             </span>
             <div className="p-5 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs leading-relaxed flex flex-wrap gap-2">
               {selectedClaim.explanation.map((token, index) => (
                 <span
                   key={index}
-                  className={`px-2 py-1 rounded font-mono transition-all ${
+                  className={`px-2.5 py-1 rounded font-mono transition-all ${
                     token.score > 0
                       ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                       : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
@@ -154,9 +154,9 @@ export function PlaygroundSection() {
           <div className="flex justify-end pt-2">
             <Link
               href="/"
-              className="inline-flex items-center space-x-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+              className="inline-flex items-center space-x-2 text-xs font-bold text-amber-300 hover:text-amber-200 uppercase tracking-wider transition-colors"
             >
-              <span>Test Your Own Claim Above</span>
+              <span>Verify Your Own Article</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
