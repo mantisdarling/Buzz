@@ -52,24 +52,24 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans desidaru-hero">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-        <div className="border-b border-slate-800 pb-6">
-          <h1 className="text-3xl font-extrabold tracking-tight flex items-center space-x-3">
-            <BarChart3 className="w-8 h-8 text-cyan-400" />
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+        <div className="border-b border-amber-500/20 pb-6">
+          <h1 className="text-3xl font-serif font-bold gold-foil-title flex items-center space-x-3">
+            <BarChart3 className="w-8 h-8 text-amber-400" />
             <span>Admin Analytics & Governance</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-300 font-light mt-1">
             Aggregate platform statistics, daily submission trends, accuracy rates, and flagged domains
           </p>
         </div>
 
         {loading ? (
-          <div className="p-12 text-center">
-            <Loader2 className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
-            <p className="text-xs text-slate-400 mt-3">Loading aggregate telemetry...</p>
+          <div className="p-16 text-center">
+            <Loader2 className="w-8 h-8 text-amber-400 animate-spin mx-auto" />
+            <p className="text-xs text-slate-400 mt-3 font-light">Loading telemetry archives...</p>
           </div>
         ) : error ? (
           <div className="p-6 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm flex items-center space-x-3">
@@ -80,77 +80,77 @@ export default function AdminPage() {
           <>
             {/* Top Stat Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2 shadow-lg">
+              <div className="p-5 rounded-2xl luxury-glass-card border border-amber-500/20 space-y-2 shadow-lg">
                 <div className="flex items-center justify-between text-slate-400">
                   <span className="text-xs font-semibold uppercase tracking-wider">Total Submissions</span>
-                  <FileCheck className="w-4 h-4 text-cyan-400" />
+                  <FileCheck className="w-4 h-4 text-amber-400" />
                 </div>
-                <div className="text-3xl font-extrabold text-slate-100">{stats.total_submissions}</div>
+                <div className="text-3xl font-serif font-bold text-slate-100">{stats.total_submissions}</div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2 shadow-lg">
+              <div className="p-5 rounded-2xl luxury-glass-card border border-amber-500/20 space-y-2 shadow-lg">
                 <div className="flex items-center justify-between text-slate-400">
                   <span className="text-xs font-semibold uppercase tracking-wider">Registered Users</span>
-                  <Users className="w-4 h-4 text-purple-400" />
+                  <Users className="w-4 h-4 text-amber-400" />
                 </div>
-                <div className="text-3xl font-extrabold text-slate-100">{stats.total_users}</div>
+                <div className="text-3xl font-serif font-bold text-slate-100">{stats.total_users}</div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2 shadow-lg">
+              <div className="p-5 rounded-2xl luxury-glass-card border border-amber-500/20 space-y-2 shadow-lg">
                 <div className="flex items-center justify-between text-slate-400">
-                  <span className="text-xs font-semibold uppercase tracking-wider">Total Feedback Received</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider">Total Feedback</span>
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 </div>
-                <div className="text-3xl font-extrabold text-slate-100">{stats.total_feedback}</div>
+                <div className="text-3xl font-serif font-bold text-slate-100">{stats.total_feedback}</div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2 shadow-lg">
+              <div className="p-5 rounded-2xl luxury-glass-card border border-amber-500/20 space-y-2 shadow-lg">
                 <div className="flex items-center justify-between text-slate-400">
                   <span className="text-xs font-semibold uppercase tracking-wider">User Precision Rate</span>
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 </div>
-                <div className="text-3xl font-extrabold text-emerald-400">{stats.positive_feedback_pct}%</div>
+                <div className="text-3xl font-serif font-bold text-emerald-400">{stats.positive_feedback_pct}%</div>
               </div>
             </div>
 
             {/* Daily Submission Volume Area Chart */}
-            <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-4">
-              <h3 className="text-sm font-semibold text-slate-200 uppercase tracking-wider">
-                Daily Submission Volume (Last 30 Days)
+            <div className="p-6 rounded-3xl luxury-glass-card border border-amber-500/20 shadow-xl space-y-4">
+              <h3 className="text-xs font-bold text-amber-300 uppercase tracking-widest">
+                Daily Verification Volume (Last 30 Days)
               </h3>
               <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={stats.daily_volume}>
                     <defs>
                       <linearGradient id="volumeGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#38bdf8" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#d4af37" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="#d4af37" stopOpacity={0} />
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="date" stroke="#64748b" tick={{ fontSize: 11 }} />
                     <YAxis stroke="#64748b" tick={{ fontSize: 11 }} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "#0f172a",
-                        borderColor: "#334155",
+                        backgroundColor: "#050507",
+                        borderColor: "rgba(212, 175, 55, 0.3)",
                         borderRadius: "0.75rem",
                         color: "#f8fafc",
                       }}
                     />
-                    <Area type="monotone" dataKey="count" stroke="#38bdf8" fillOpacity={1} fill="url(#volumeGrad)" />
+                    <Area type="monotone" dataKey="count" stroke="#d4af37" fillOpacity={1} fill="url(#volumeGrad)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             {/* Top Flagged Domains Bar Chart */}
-            <div className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-xl space-y-4">
-              <h3 className="text-sm font-semibold text-slate-200 uppercase tracking-wider flex items-center space-x-2">
+            <div className="p-6 rounded-3xl luxury-glass-card border border-amber-500/20 shadow-xl space-y-4">
+              <h3 className="text-xs font-bold text-amber-300 uppercase tracking-widest flex items-center space-x-2">
                 <Globe className="w-4 h-4 text-rose-400" />
                 <span>Top Flagged Misinformation Source Domains</span>
               </h3>
               {stats.top_flagged_domains.length === 0 ? (
-                <p className="text-xs text-slate-400 italic">No domain flags recorded yet.</p>
+                <p className="text-xs text-slate-400 font-light italic">No domain flags recorded yet.</p>
               ) : (
                 <div className="h-64 w-full">
                   <ResponsiveContainer width="100%" height="100%">
@@ -159,8 +159,8 @@ export default function AdminPage() {
                       <YAxis stroke="#64748b" tick={{ fontSize: 11 }} />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: "#0f172a",
-                          borderColor: "#334155",
+                          backgroundColor: "#050507",
+                          borderColor: "rgba(212, 175, 55, 0.3)",
                           borderRadius: "0.75rem",
                           color: "#f8fafc",
                         }}

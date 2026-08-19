@@ -32,17 +32,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans desidaru-hero">
       <Navbar />
 
       <main className="flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-md p-8 rounded-3xl bg-slate-900/80 border border-slate-800 shadow-2xl space-y-6 backdrop-blur-xl">
+        <div className="w-full max-w-md p-8 sm:p-10 rounded-3xl luxury-glass-card border border-amber-500/30 shadow-2xl space-y-6">
           <div className="text-center space-y-2">
-            <div className="inline-flex p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 mb-2">
+            <div className="inline-flex p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 mb-2">
               <ShieldCheck className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-extrabold tracking-tight">Sign In to Buzz</h2>
-            <p className="text-xs text-slate-400">TruthLens - AI Powered Misinformation and Fake News Detector</p>
+            <h2 className="text-2xl font-serif font-bold gold-foil-title">Sign In to Buzz</h2>
+            <p className="text-xs text-slate-300 font-light">TruthLens — AI Misinformation & Claim Verifier</p>
           </div>
 
           {error && (
@@ -61,7 +61,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-500 text-slate-100 text-xs outline-none transition"
+                className="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-amber-500/20 focus:border-amber-400 text-slate-100 text-xs outline-none transition"
               />
             </div>
 
@@ -73,17 +73,17 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-slate-800 focus:border-cyan-500 text-slate-100 text-xs outline-none transition"
+                className="w-full px-4 py-3 rounded-xl bg-slate-950/90 border border-amber-500/20 focus:border-amber-400 text-slate-100 text-xs outline-none transition"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl font-bold text-xs bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/20 disabled:opacity-50 transition flex items-center justify-center space-x-2"
+              className="w-full py-3.5 rounded-xl font-bold text-xs gold-btn-primary shadow-lg disabled:opacity-50 transition flex items-center justify-center space-x-2"
             >
               {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
               ) : (
                 <>
                   <LogIn className="w-4 h-4" />
@@ -93,9 +93,9 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-slate-400">
+          <p className="text-center text-xs text-slate-400 font-light">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-cyan-400 font-semibold hover:underline">
+            <Link href="/register" className="text-amber-300 font-semibold hover:underline">
               Create one now
             </Link>
           </p>
